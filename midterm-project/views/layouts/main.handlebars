@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="/public/css/main.css">
+  <title>Final Project</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
+</head>
+<div class="nav">
+  <div>
+    <a href="/adult">Adult</a>
+    <a href="/child">Child</a>
+    <a href="/random">Random</a>
+    <a href="/game">Select a Game</a>
+    <a href="/youngtoold">Age order</a>
+  </div>
+</div>
+
+<body>
+  <input type="text" id="Search" placeholder="Enter a Game"> {{{body}}}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
+  <script>
+    $('#Search').keyup(function() {
+      $(".article_container").remove();
+      var game = $("#Search").val();
+      if(game == ''){
+        location.reload();
+      }
+      $.get("/api/reviews", function(result){
+        $.each(result, function(i, n){
+          if (n['game'] == game) {
+            $("h2").append("<article class=\"article_container\">\n<h2 class=\"title\">"+n['game']+"</h2>\n<h4 class=\"name\">By:" + n['name'] +","+ n['age']+"</h4>\n<hr><div class=\"content\">"+n['review']+"</div><div class=\"tags\">"+n['tags']+"</div></article>");
+          }
+        });
+      });
+    });
+  </script>
+</body>
+
+</html>

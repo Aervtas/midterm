@@ -1,0 +1,25 @@
+{{#if tag}}
+<h2>Recent Reviews in {{tag}}:</h2>
+{{else}}
+<h2>Game Reviews:</h2>
+{{/if}}
+
+{{#each data}}
+<article class="article_container">
+	<h2 class="title">{{this.game}}</h2>
+  <h4 class="name">By: {{this.name}}, {{this.age}}</h4>
+	<hr>
+	<div class="content">
+	    {{{this.review}}}
+	</div>
+  <div class="tags">
+	    {{this.tags}}
+	</div>
+</article>
+{{else}}
+
+<article>
+    <h1>There are no game reviews yet.</h1>
+    <a href="/addReview">Write your first review!</a>
+</article>
+{{/each}}
